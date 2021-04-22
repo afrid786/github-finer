@@ -5,13 +5,15 @@ import User from './components/User';
 import Search from './components/Search';
 
 import axios from 'axios';
+import Alert from './components/Alert';
 
 
 class App extends React.Component {
 
   state = {
     user:[],
-    isLoading:false
+    isLoading:false,
+    alert:null
 
 }
 // async	componentDidMount () {
@@ -33,13 +35,24 @@ searchUsers = async (text) => {
 clearUsers = () => {
   this.setState({user:[],isLoading:false});
 }
+ setAlert = (msg,type) => {
+   this.setState({alert:{msg,type}});
+
+   setTimeout(() => this.setState({alert:null}),2000);
+ }
+
   render() {
 
-    const {user,isLoading} = this.state;
+    const {user,isLoading,alert} = this.state;
     return (
       <div className="App">
        <Navbar title="Github finder"/>
-       <Search  searchUser={this.searchUsers} clearUser={this.clearUsers}/>
+        <Alert alert={alert}/>
+       <Search  searchUser={this.searchUsers}
+        clearUser={this.clearUsers}
+        setAlert={this.setAlert}
+        />
+        
        <div className='container'>
         <User isLoading={isLoading} user={user} />
        </div>

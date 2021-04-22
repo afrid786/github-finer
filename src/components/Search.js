@@ -11,13 +11,18 @@ export class Search extends Component {
 
     static propTypes = {
         searchUser: PropTypes.func.isRequired,
-        clearUser:PropTypes.func.isRequired
+        clearUser:PropTypes.func.isRequired,
+        setAlert: PropTypes.func.isRequired
     }
 
     onSubmit  = e => {
         e.preventDefault();
-        this.props.searchUser(this.state.text);
-        this.setState({text:''});
+        if(this.state.text === '') {
+            this.props.setAlert('Please enter something','danger');
+        }else {
+            this.props.searchUser(this.state.text);
+            this.setState({text:''});
+        }
     }
 
     render() {
