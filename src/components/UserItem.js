@@ -1,8 +1,8 @@
 import React from 'react'
-// import axios from 'axios';
+import {Link} from 'react-router-dom';
 
 const UserItem = (props) => {
-    const {html_url , avatar_url, login} = props.user;
+    const { avatar_url, login} = props.user;
         return (
             <div  className="card text-center">
                <img 
@@ -13,9 +13,9 @@ const UserItem = (props) => {
                />
                <h3>{login}</h3>
                 <div>
-                    <a href={html_url} className='btn btn-dark btn-sm my-I'>
+                    <Link to={`/user/${login}`} className='btn btn-dark btn-sm my-I'>
                     more
-                    </a>
+                    </Link>
                 </div>    
             </div>
         )
